@@ -1,0 +1,42 @@
+WITH data_school AS (
+    SELECT
+        e.rentree_scolaire,
+        e.region_academique,
+        e.academie,
+        e.departement,
+        e.commune,
+        e.numero_college AS UAI, 
+        e.denomination_principale AS type_schools,
+        e.patronyme AS name_schools,
+        e.secteur,
+        e.nombre_eleves_total,
+        e.`6eme_total` AS sixieme,
+        e.`5eme_total` AS cinquieme,
+        e.`4eme_total` AS quatrieme,
+        e.`3eme_total` AS troisieme,
+        e.code_postal,
+        n.type_etablissement,
+        n.adresse,
+        n.libelle_etat_etablissement,
+        n.date_observation,
+        n.coordonnee_x,
+        n.coordonnee_y,
+        n.latitude,
+        n.longitude,
+        n.position
+    FROM `starlit-hangar-411310.analysis.nb_eleves` AS e
+    LEFT JOIN `starlit-hangar-411310.analysis.digital_school` AS n
+    ON UAI = n.uai
+    WHERE e.rentree_scolaire = 2022 -- Par exemple, filtrer par année scolaire
+)
+
+SELECT 
+    data_school.*,
+    (COALESCE(data_school.sixieme, 0) + 
+     COALESCE(data_school.cinquieme, 0) + 
+     COALESCE(data_school.quatrieme, 0) + 
+     COALESCE(data_school.troisieme, 0)) AS nb_student
+FROM 
+    data_school
+ORDER BY 
+    data_school.nombre_eleves_total DESC;
