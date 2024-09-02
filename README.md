@@ -1,6 +1,6 @@
 # tdb_survey_digital_education
 
-Survey on the digital transition in the educational system. Status : **on doing**
+Survey on the digital transition in the educational system. Status : https://lookerstudio.google.com/reporting/388338fd-615e-4ec1-8cb0-fb4c05d66008/page/mjYAE?s=i-9ZoQxQvpE
 
 ## **Dashboard for Digital Publishers**
 
